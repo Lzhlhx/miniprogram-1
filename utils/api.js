@@ -6,7 +6,7 @@ const API_HOST = 'mx4gkguhd7.re.qweatherapi.com';  // 专属API域名
 // 构建API基础URL
 const WEATHER_BASE_URL = `https://${API_HOST}/v7`;
 // 地理位置API使用通用域名
-const GEO_BASE_URL = `https://geoapi.qweather.com/v2`;
+const GEO_BASE_URL = `https://${API_HOST}/geo/v2`;
 const AIR_BASE_URL = `https://${API_HOST}/v7/air`;
 
 // 西安市的默认位置信息
