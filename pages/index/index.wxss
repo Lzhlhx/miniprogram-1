@@ -247,6 +247,24 @@ page {
   border-radius: 20rpx;
   padding: 20rpx;
   box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 图表标题 */
+.chart-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+  text-align: center;
+  margin-bottom: 15rpx;
+}
+
+.temp-chart, .humidity-chart {
+  width: 340px;
+  height: 200px;
+  margin: 0 auto;
 }
 
 /* 更新时间 */
@@ -254,5 +272,32 @@ page {
   text-align: center;
   font-size: 24rpx;
   color: #999;
-  margin: 30rpx 0;
+  margin: 10rpx 0 20rpx 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.data-source {
+  margin-top: 6rpx;
+  font-size: 22rpx;
+  color: #aaa;
+}
+
+/* 开发者信息 */
+.developer-info {
+  margin-top: 40rpx;
+  margin-bottom: 30rpx;
+  padding: 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-top: 1px solid #eee;
+}
+
+.dev-info-text {
+  font-size: 22rpx;
+  color: #999;
+  line-height: 1.6;
+  text-align: center;
 }

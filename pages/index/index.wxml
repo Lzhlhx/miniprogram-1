@@ -101,16 +101,26 @@
     <!-- 气温和湿度图表 -->
     <view class="chart-container">
       <view class="chart-box">
-        <canvas canvas-id="tempChart" id="tempChart" class="temp-chart" style="width: 320px; height: 200px;"></canvas>
+        <view class="chart-title">未来12小时温度变化</view>
+        <canvas canvas-id="tempChart" id="tempChart" class="temp-chart" style="width: 340px; height: 200px;"></canvas>
       </view>
       <view class="chart-box">
-        <canvas canvas-id="humidityChart" id="humidityChart" class="humidity-chart" style="width: 320px; height: 200px;"></canvas>
+        <view class="chart-title">未来12小时湿度变化</view>
+        <canvas canvas-id="humidityChart" id="humidityChart" class="humidity-chart" style="width: 340px; height: 200px;"></canvas>
       </view>
     </view>
 
     <!-- 更新时间 -->
     <view class="update-time" wx:if="{{showUpdateTime}}">
-      <text>更新时间: {{weatherInfo.obsTime}}</text>
+      <text>最后更新时间: {{weatherInfo.obsTime}}</text>
+      <text class="data-source">数据来源：和风天气</text>
+    </view>
+    
+    <!-- 开发者信息 -->
+    <view class="developer-info">
+      <text class="dev-info-text">2025年西电B测作品</text>
+      <text class="dev-info-text">作者：卢子恒 周樾 曹家驹</text>
+      <text class="dev-info-text">© 2025 西安电子科技大学 保留所有权利</text>
     </view>
   </block>
 </view>
