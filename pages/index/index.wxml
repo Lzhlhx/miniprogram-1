@@ -1,27 +1,116 @@
 <!--index.wxml-->
-<scroll-view class="scrollarea" scroll-y type="list">
-  <view class="container">
-    <view class="userinfo">
-      <block wx:if="{{canIUseNicknameComp && !hasUserInfo}}">
-        <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
-          <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
-        </button>
-        <view class="nickname-wrapper">
-          <text class="nickname-label">昵称</text>
-          <input type="nickname" class="nickname-input" placeholder="请输入昵称" bind:change="onInputChange" />
-        </view>
-      </block>
-      <block wx:elif="{{!hasUserInfo}}">
-        <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称 </button>
-        <view wx:else> 请使用2.10.4及以上版本基础库 </view>
-      </block>
-      <block wx:else>
-        <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-        <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-      </block>
+<view class="container">
+  <!-- 头部定位信息 -->
+  <view class="header">
+    <view class="location">
+      <text class="city">{{cityName}}</text>
+      <text class="date">{{today}} {{week}}</text>
     </view>
-    <view class="usermotto">
-      <text class="user-motto">{{motto}}</text>
+    <view class="refresh" bindtap="refreshData">
+      <text class="iconfont">🔄</text>
     </view>
   </view>
-</scroll-view>
+
+  <!-- 加载状态 -->
+  <view class="loading-container" wx:if="{{loading}}">
+    <view class="loading">数据加载中...</view>
+  </view>
+
+  <!-- 错误提示 -->
+  <view class="error-container" wx:if="{{error}}">
+    <view class="error">{{error}}</view>
+    <view class="retry" bindtap="getWeatherData">重试</view>
+  </view>
+
+  <!-- 天气和空气质量信息 -->
+  <block wx:if="{{!loading && !error && weatherInfo && airQuality}}">
+    <!-- 天气信息 -->
+    <view class="weather-card">
+      <view class="weather-main">
+        <view class="temp-wrap">
+          <text class="temp">{{weatherInfo.temp}}</text>
+          <text class="temp-unit">°C</text>
+        </view>
+        <view class="weather-desc">
+          <view class="weather-icon">
+            <text class="weather-text">{{weatherInfo.text}}</text>
+          </view>
+          <view class="weather-feel">体感温度 {{weatherInfo.feelsLike}}°C</view>
+        </view>
+      </view>
+      <view class="weather-detail">
+        <view class="detail-item">
+          <text class="detail-label">湿度</text>
+          <text class="detail-value">{{weatherInfo.humidity}}%</text>
+        </view>
+        <view class="detail-item">
+          <text class="detail-label">风向</text>
+          <text class="detail-value">{{weatherInfo.windDir}}</text>
+        </view>
+        <view class="detail-item">
+          <text class="detail-label">风速</text>
+          <text class="detail-value">{{weatherInfo.windSpeed}}km/h</text>
+        </view>
+        <view class="detail-item">
+          <text class="detail-label">气压</text>
+          <text class="detail-value">{{weatherInfo.pressure}}hPa</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空气质量信息 -->
+    <view class="air-card">
+      <view class="air-title">空气质量</view>
+      <view class="air-content">
+        <view class="air-value-container" style="background-color: {{aqiInfo.color}}">
+          <text class="air-value">{{airQuality.aqi}}</text>
+          <text class="air-level">{{aqiInfo.level}}</text>
+        </view>
+        <view class="air-detail">
+          <view class="air-item">
+            <text class="air-label">PM2.5</text>
+            <text class="air-item-value">{{airQuality.pm2p5}}</text>
+          </view>
+          <view class="air-item">
+            <text class="air-label">PM10</text>
+            <text class="air-item-value">{{airQuality.pm10}}</text>
+          </view>
+          <view class="air-item">
+            <text class="air-label">NO₂</text>
+            <text class="air-item-value">{{airQuality.no2}}</text>
+          </view>
+          <view class="air-item">
+            <text class="air-label">SO₂</text>
+            <text class="air-item-value">{{airQuality.so2}}</text>
+          </view>
+          <view class="air-item">
+            <text class="air-label">O₃</text>
+            <text class="air-item-value">{{airQuality.o3}}</text>
+          </view>
+          <view class="air-item">
+            <text class="air-label">CO</text>
+            <text class="air-item-value">{{airQuality.co}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="air-suggestion">
+        <text>{{aqiInfo.suggestion}}</text>
+      </view>
+    </view>
+
+    <!-- 气温和湿度图表 -->
+    <view class="chart-container">
+      <view class="chart-box">
+        <canvas canvas-id="tempChart" id="tempChart" class="temp-chart" style="width: 320px; height: 200px;"></canvas>
+      </view>
+      <view class="chart-box">
+        <canvas canvas-id="humidityChart" id="humidityChart" class="humidity-chart" style="width: 320px; height: 200px;"></canvas>
+      </view>
+    </view>
+
+    <!-- 更新时间 -->
+    <view class="update-time" wx:if="{{showUpdateTime}}">
+      <text>更新时间: {{weatherInfo.obsTime}}</text>
+    </view>
+  </block>
+</view>

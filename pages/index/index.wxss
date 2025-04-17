@@ -1,62 +1,258 @@
 /**index.wxss**/
 page {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-.scrollarea {
-  flex: 1;
-  overflow-y: hidden;
+  background-color: #f6f6f6;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+    Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei',
+    sans-serif;
 }
 
-.userinfo {
+.container {
+  padding: 20rpx;
+  box-sizing: border-box;
+}
+
+/* 头部样式 */
+.header {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  color: #aaa;
-  width: 80%;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #eee;
 }
 
-.userinfo-avatar {
-  overflow: hidden;
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
+.location {
+  display: flex;
+  flex-direction: column;
+}
+
+.city {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.date {
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 6rpx;
+}
+
+.refresh {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
   border-radius: 50%;
 }
 
-.usermotto {
-  margin-top: 200px;
+.refresh .iconfont {
+  font-size: 40rpx;
+  color: #666;
 }
 
-.avatar-wrapper {
-  padding: 0;
-  width: 56px !important;
-  border-radius: 8px;
-  margin-top: 40px;
-  margin-bottom: 40px;
-}
-
-.avatar {
-  display: block;
-  width: 56px;
-  height: 56px;
-}
-
-.nickname-wrapper {
+/* 加载与错误提示 */
+.loading-container, .error-container {
   display: flex;
-  width: 100%;
-  padding: 16px;
-  box-sizing: border-box;
-  border-top: .5px solid rgba(0, 0, 0, 0.1);
-  border-bottom: .5px solid rgba(0, 0, 0, 0.1);
-  color: black;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 400rpx;
 }
 
-.nickname-label {
-  width: 105px;
+.loading {
+  color: #666;
+  font-size: 28rpx;
 }
 
-.nickname-input {
+.error {
+  color: #e64340;
+  font-size: 28rpx;
+  text-align: center;
+}
+
+.retry {
+  margin-top: 20rpx;
+  padding: 10rpx 30rpx;
+  background-color: #4A90E2;
+  color: #fff;
+  border-radius: 30rpx;
+  font-size: 28rpx;
+}
+
+/* 天气卡片 */
+.weather-card {
+  margin-top: 30rpx;
+  padding: 30rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30rpx;
+}
+
+.temp-wrap {
+  display: flex;
+  align-items: flex-start;
+}
+
+.temp {
+  font-size: 80rpx;
+  font-weight: bold;
+  color: #333;
+  line-height: 1;
+}
+
+.temp-unit {
+  font-size: 30rpx;
+  margin-top: 12rpx;
+  color: #666;
+}
+
+.weather-desc {
+  text-align: right;
+}
+
+.weather-icon {
+  margin-bottom: 10rpx;
+}
+
+.weather-text {
+  font-size: 32rpx;
+  color: #333;
+}
+
+.weather-feel {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.weather-detail {
+  display: flex;
+  flex-wrap: wrap;
+  border-top: 1rpx solid #f0f0f0;
+  padding-top: 20rpx;
+}
+
+.detail-item {
+  width: 50%;
+  margin-bottom: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-label {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 6rpx;
+}
+
+.detail-value {
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 空气质量卡片 */
+.air-card {
+  margin-top: 30rpx;
+  padding: 30rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.air-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.air-content {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.air-value-container {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 30rpx;
+  background-color: #f0f0f0;
+}
+
+.air-value {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #fff;
+}
+
+.air-level {
+  font-size: 24rpx;
+  color: #fff;
+  margin-top: 6rpx;
+}
+
+.air-detail {
   flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.air-item {
+  width: 33.33%;
+  margin-bottom: 20rpx;
+}
+
+.air-label {
+  font-size: 24rpx;
+  color: #999;
+  display: block;
+  margin-bottom: 6rpx;
+}
+
+.air-item-value {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.air-suggestion {
+  font-size: 26rpx;
+  color: #666;
+  line-height: 1.5;
+  padding: 20rpx;
+  background-color: #f9f9f9;
+  border-radius: 10rpx;
+}
+
+/* 图表容器 */
+.chart-container {
+  margin-top: 30rpx;
+}
+
+.chart-box {
+  margin-bottom: 30rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 20rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+/* 更新时间 */
+.update-time {
+  text-align: center;
+  font-size: 24rpx;
+  color: #999;
+  margin: 30rpx 0;
 }
